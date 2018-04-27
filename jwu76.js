@@ -3,7 +3,6 @@ $(document).ready(function() {
     $(table).on('click', function() {
         var showTable = document.getElementById("resultTable");
         var screen = document.getElementById("formInit");
-
         showTable.style.display = "block";
         screen.style.display = "none";
     });
@@ -50,22 +49,31 @@ function initMap() {
         center: uluru
     });
     var year = document.getElementById("year");
-    var url = "https://data.cityofchicago.org/resource/6zsd-86xi.json?year=" + year.value;
+    var url = "https://data.cityofchicago.org/resource/6zsd-86xi.json?year=" + $("#year2").val();
     $.get(url, function(response) {
+        console.log(url);
         $.each(response, function(i, v) {
-            var contentString = "Location: " + v.block + "<br>" + "Date & Time: " +v.date + "<br>" + "Crime: " + v.primary_type;
-            var marker = new google.maps.Marker({
-                position: { lat: parseFloat(v.latitude), lng: parseFloat(v.longitude) },
-                map: map,
-                icon: "http://maps.google.com/mapfiles/kml/pal3/icon35.png"
-            });
-            
-            var info = new google.maps.InfoWindow({
-                content: contentString
-            });
-            marker.addListener('click', function(){
-                info.open(map, marker);
-            });
+            var contentString = "Location: " + v.block + "<br>Date & Time: " + v.date + "<br>Crime: " + v.primary_type + "<br> Arrested: " + v.arrest;
+                if(v.arrest === true){
+                var marker = new google.maps.Marker ({
+                    position: { lat: parseFloat(v.latitude), lng: parseFloat(v.longitude) },
+                    map: map,
+                    icon: "https://maps.google.com/mapfiles/ms/icons/red-dot.png"
+                });
+                }
+                if(v.arrest === false){
+                    var marker = new google.maps.Marker ({
+                    position: { lat: parseFloat(v.latitude), lng: parseFloat(v.longitude) },
+                    map: map,
+                    icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                });
+                }
+                 var info = new google.maps.InfoWindow({
+                     content: contentString
+                 });
+                 marker.addListener('click', function() {
+                    info.open(map, marker);
+                });
         });
     });
 }
