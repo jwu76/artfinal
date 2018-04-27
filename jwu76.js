@@ -17,7 +17,7 @@ $(document).ready(function() {
         showMap.style.display = "block";
         screen.style.display = "none";
     });
-    
+
     //show the div screen of table searched by specific crime
     //hide the search div screen
     var table2 = document.getElementById("TableCrimeResult");
@@ -27,7 +27,7 @@ $(document).ready(function() {
         showTable.style.display = "block";
         screen.style.display = "none";
     });
-    
+
     //show the div screen of results map through searching by specific crime
     //hide the search div screen
     var map2 = document.getElementById("MapCrimeResult");
@@ -46,7 +46,7 @@ $(document).ready(function() {
         showTable.style.display = "none";
         screen.style.display = "block";
     });
-    
+
     //go back to the search screen and hide the result map found by search using year
     var back22 = document.getElementById("back2");
     $(back22).on('click', function() {
@@ -55,7 +55,7 @@ $(document).ready(function() {
         showMap.style.display = "none";
         screen.style.display = "block";
     });
-    
+
     //go back to the search screen and hide the result map found by search using specific crime
     var back33 = document.getElementById("back3");
     $(back33).on('click', function() {
@@ -73,7 +73,7 @@ $(document).ready(function() {
         showMap.style.display = "none";
         screen.style.display = "block";
     });
-    
+
     //execute the search by year function and display the year on the map result screen
     var search = document.getElementById("search");
     $(search).on('click', function() {
@@ -85,7 +85,7 @@ $(document).ready(function() {
         title.value += year.value;
         initMap();
     });
-    
+
     //execute the search by specific crime function and display that crime on the map result screen
     var searchC = document.getElementById("searchCrime");
     $(searchC).on('click', function() {
@@ -107,18 +107,18 @@ function initMap() {
         zoom: 13,
         center: uluru
     });
-    
+
     //make the table
-    var table = document.getElementById("resultTable");
-    var tbl = document.createElement("table");
-    var tblBody = document.createElement("tbody");
     var year = document.getElementById("year");
-    var url = "https://data.cityofchicago.org/resource/6zsd-86xi.json?year=" + $("#year2").val
+    var url = "https://data.cityofchicago.org/resource/6zsd-86xi.json?year=" + $("#year2").val();
     //get the data 
     $.get(url, function(response) {
+        var table = document.getElementById("resultTable");
+        var tbl = document.createElement("table");
+        var tblBody = document.createElement("tbody");
         console.log(url);
         $.each(response, function(i, v) {
-            
+
             //add the table to the table
             var DT = String(v.date);
             var split = DT.split("T");
@@ -148,7 +148,7 @@ function initMap() {
                 row.appendChild(cell);
             }
             tblBody.appendChild(row);
-            
+
             //create the content of the marker
             var contentString = "Location: " + v.block +
                 "<br>Date & Time: " + v.date + "<br>Crime: " + v.primary_type + "<br> Took Place In: " + v.location_description +
@@ -167,7 +167,7 @@ function initMap() {
                     icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
                 });
             }
-            
+
             //add content to marker
             var info = new google.maps.InfoWindow({
                 content: contentString
@@ -176,7 +176,7 @@ function initMap() {
                 info.open(map, marker);
             });
         });
-        
+
         //show the table itself
         tbl.appendChild(tblBody);
         table.appendChild(tbl);
@@ -227,7 +227,7 @@ function crimeMap() {
                 row.appendChild(cell);
             }
             tblBody.appendChild(row);
-            
+
             //create the content of the marker
             var contentString = "Location: " + v.block +
                 "<br>Date & Time: " + v.date + "<br>Crime: " + v.primary_type + "<br> Took Place In: " + v.location_description +
@@ -246,18 +246,18 @@ function crimeMap() {
                     icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
                 });
             }
-            
+
             //add content to the marker
             var info = new google.maps.InfoWindow({
                 content: contentString
             });
-            
+
             //make the marker clickable and display content
             marker.addListener('click', function() {
                 info.open(map2, marker);
             });
         });
-        
+
         //display the data results on the table
         tbl.appendChild(tblBody);
         table.appendChild(tbl);
