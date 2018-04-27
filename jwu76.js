@@ -53,7 +53,9 @@ function initMap() {
     $.get(url, function(response) {
         console.log(url);
         $.each(response, function(i, v) {
-            var contentString = "Location: " + v.block + "<br>Date & Time: " + v.date + "<br>Crime: " + v.primary_type + "<br> Arrested: " + v.arrest;
+            var contentString = "Location: " + v.block 
+            + "<br>Date & Time: " + v.date + "<br>Crime: " + v.primary_type + "<br> Took Place In: " + v.location_description 
+            + "<br> Arrested: " + v.arrest;
                 if(v.arrest === true){
                 var marker = new google.maps.Marker ({
                     position: { lat: parseFloat(v.latitude), lng: parseFloat(v.longitude) },
