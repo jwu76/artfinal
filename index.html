@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <!--scripts used for the project-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -15,6 +16,8 @@
 </head>
 
 <body>
+    <!--search fields and buttons items for the application-->
+    <!--inital search screen-->
     <div id="formInit" class="container screen">
         <div clas="container">
             <div id="yearSearch">
@@ -38,12 +41,13 @@
         </div>
     </div>
 
-    <div style="display:none;" id="resultTable" class="container screen">
+<!--result table screen for search by year-->
+    <div style="display:none;" id="resultTable" class="screen">
         <button type="button" class="btn btn-info" id="back1">
             <i class="material-icons">keyboard_backspace</i>
         </button>
     </div>
-
+<!--result map screen for search by year-->
     <div style="display:none;" id="resultMap" class="screen">
         <button type="button" class="btn btn-info" id="back2">
             <i class="material-icons">keyboard_backspace</i>
@@ -51,13 +55,19 @@
         <label> YEAR: <input type="text" readonly id="year2" size="4" disabled></input></label>
         <div id="map"></div>
     </div>
-
+<!--result map screen for search by crime-->
     <div style="display:none;" id="resultMap2" class="screen">
         <button type="button" class="btn btn-info" id="back3">
             <i class="material-icons">keyboard_backspace</i>
         </button>
         <label> CRIME: <input type="text" readonly id="crime2" disabled></input></label>
         <div id="map2"></div>
+    </div>
+    <!--result table screen for search by crime-->
+        <div style="display:none;" id="resultTable2" class="screen">
+        <button type="button" class="btn btn-info" id="back4">
+            <i class="material-icons">keyboard_backspace</i>
+        </button>
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5uMEVQFAwx-e3h1g6B1_glDKm78SIhhs"></script>
 </body>
